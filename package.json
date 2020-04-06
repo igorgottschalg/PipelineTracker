@@ -1,0 +1,29 @@
+{
+  "name": "pipelines",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Igor Gottschalg <igor@gottschalg.mobi>",
+  "license": "MIT",
+  "scripts": {
+    "deploy:functions": "firebase deploy --only functions",
+    "changelog": "auto-changelog --template changelog-template.hbs -p -u --commit-limit false",
+    "changelog-debug": "auto-changelog --template changelog-template.hbs -p --template json --output changelog-data.json",
+    "version": "yarn changelog -p && git add CHANGELOG.md"
+  },
+  "devDependencies": {
+    "auto-changelog": "^1.16.4",
+    "husky": "^4.2.3"
+  },
+  "auto-changelog": {
+    "commitLimit": false,
+    "unreleased": true,
+    "replaceText": {
+      "[Ff]eature:": "",
+      "[Ff]ix:": "",
+      "[Bb]reak:": ""
+    },
+    "includeBranch": [
+      "master"
+    ]
+  }
+}
