@@ -19,7 +19,9 @@ const checkAuth = req => {
 
 const add = pipelineInfo => {
     const {project, pipeline, step, status, datetime, job, branch} = pipelineInfo;
-    return firestore.doc(`${project}/${branch}/${datetime}`).set({
+    return firestore.add({
+        project,
+        branch,
         job,
         step,
         pipeline,
