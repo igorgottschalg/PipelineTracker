@@ -19,10 +19,10 @@ const checkAuth = req => {
 
 const add = pipelineInfo => {
     const {project, pipeline, step, status, datetime, job, branch} = pipelineInfo;
-    return firestore.doc(project).doc(branch).add({
-        pipeline,
+    return firestore.doc(`${project}/${branch}/${datetime}`).set({
         job,
         step,
+        pipeline,
         status,
         datetime
     });
@@ -38,7 +38,7 @@ const app = (request, response) => {
             return response.status(200).json(request.query);
         })
         .catch(e => {
-            return response.status(500).send(e);
+            return response.status(500).json(e);
         });
 };
 
